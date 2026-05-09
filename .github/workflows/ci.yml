@@ -37,7 +37,7 @@ jobs:
       - name: Run backend unit tests
         run: |
           cd backend
-          pytest -v
+          python -m pytest -v
 
   # ── Етап 2: Збірка Docker-образів (Перевірка Dockerfile) ──────────────────
   build-docker:

@@ -2,9 +2,9 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List, Optional
-from .database import engine, Base, get_db
-from .models import Task
-from .schemas import TaskCreate, TaskUpdate, TaskResponse
+from app.database import engine, Base, get_db
+from app.models import Task
+from app.schemas import TaskCreate, TaskUpdate, TaskResponse
 
 # Створення таблиць в БД при старті
 Base.metadata.create_all(bind=engine)
