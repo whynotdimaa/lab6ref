@@ -12,7 +12,9 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(
     title="TaskFlow Hub API",
     description="Modern and high-performance task management API built with FastAPI",
-    version="1.0.0"
+    version="1.0.0",
+    docs_url="/api/docs",
+    openapi_url="/api/openapi.json"
 )
 
 # Налаштування CORS для підключення фронтенду
