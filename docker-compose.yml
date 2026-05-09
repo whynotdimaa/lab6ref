@@ -1,0 +1,66 @@
+services:
+
+  # ── База даних PostgreSQL ──────────────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    container_name: taskflow_db
+    environment:
+      POSTGRES_DB: taskflow
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - taskflow_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d taskflow"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  # ── FastAPI Бекенд ─────────────────────────────────────────────────────────
+  backend:
+    build: ./backend
+    container_name: taskflow_backend
+    environment:
+      DATABASE_URL: postgresql://postgres:postgrespassword123@db:5432/taskflow
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - taskflow_net
+    restart: unless-stopped
+
+  # ── React Фронтенд ────────────────────────────────────────────────────────
+  frontend:
+    build: ./frontend
+    container_name: taskflow_frontend
+    depends_on:
+      - backend
+    networks:
+      - taskflow_net
+    restart: unless-stopped
+
+  # ── API Gateway (Nginx) ────────────────────────────────────────────────────
+  nginx:
+    image: nginx:alpine
+    container_name: taskflow_gateway
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - taskflow_net
+    restart: unless-stopped
+
+# ── Опис спільних мереж та сховищ ──────────────────────────────────────────
+volumes:
+  postgres_data:
+
+networks:
+  taskflow_net:
+    driver: bridge
