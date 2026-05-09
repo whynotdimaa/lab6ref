@@ -1,6 +1,6 @@
 # ⚡ TaskFlow Hub — Преміум Менеджер Завдань
 
-[![TaskFlow Hub CI/CD Pipeline](https://github.com/whynotdimaa/geocenter/actions/workflows/ci.yml/badge.svg)](https://github.com/whynotdimaa/geocenter/actions/workflows/ci.yml)
+[![TaskFlow Hub CI/CD Pipeline](https://github.com/whynotdimaa/lab6ref/actions/workflows/ci.yml/badge.svg)](https://github.com/whynotdimaa/lab6ref/actions/workflows/ci.yml)
 
 **TaskFlow Hub** — це сучасний, високопродуктивний та візуально досконалий веб-додаток для керування завданнями, побудований за мікросервісною архітектурою. Проєкт розроблено в рамках **Лабораторної роботи №6 (DevOps, CI/CD, Docker)** з метою демонстрації сучасних підходів до контейнеризації, оркестрації та автоматизованого тестування.
 
